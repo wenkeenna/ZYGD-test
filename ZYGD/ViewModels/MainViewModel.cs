@@ -12,28 +12,34 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using ZYGD.Common;
 using ZYGD.Extensions;
+using ZYGD.Events;
 
 namespace ZYGD.ViewModels
 {
     class MainViewModel: BindableBase
     {
+        private IEventAggregator _eventAggregator;
         public MainViewModel(IRegionManager regionManager, IContainerExtension containerExtension, IEventAggregator ea)
         {
             this._regionManager = regionManager;
+            _eventAggregator=ea;
             _containerExtension = containerExtension;
             NavigateCommand = new DelegateCommand<string>(Navigate);
-            
 
 
+            _eventAggregator.GetEvent<Event_Window_Loaded>().Subscribe(InitialView);
 
         }
-       private Dictionary<string, string> _Menu;
+     
         
         private IContainerExtension? _containerExtension;
       
         private readonly IRegionManager _regionManager;
         public DelegateCommand<string> NavigateCommand{ get; private set; }
-      
+        private void InitialView(object obj)
+        {
+            Navigate("HomeView");
+        }
 
         private void Navigate(string obj)
         {

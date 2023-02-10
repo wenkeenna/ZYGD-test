@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZYGD.Events;
 
 namespace ZYGD.Views
 {
@@ -20,9 +22,16 @@ namespace ZYGD.Views
     /// </summary>
     public partial class HomeView : UserControl
     {
-        public HomeView()
+        public IEventAggregator _eventAggregator;
+        public HomeView(IEventAggregator ea)
         {
             InitializeComponent();
+            _eventAggregator = ea;
+        }
+
+        private void ItemsControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _eventAggregator.GetEvent<Event_PMatrix1Click>().Publish(sender);
         }
     }
 }

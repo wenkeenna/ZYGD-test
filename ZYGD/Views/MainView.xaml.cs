@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ZYGD.Events;
 
 namespace ZYGD.Views
 {
@@ -20,10 +22,12 @@ namespace ZYGD.Views
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView()
+        private IEventAggregator _eventAggregator;
+        public MainView(IEventAggregator ea)
         {
             InitializeComponent();
 
+            _eventAggregator = ea;
 
             BtnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
             BtnMax.Click += (s, e) =>
@@ -47,6 +51,9 @@ namespace ZYGD.Views
             };
         }
 
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _eventAggregator.GetEvent<Event_Window_Loaded>().Publish("HomeView");
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,6 +30,53 @@ namespace ZYGD
             containerRegistry.RegisterForNavigation<CameraView, CameraViewModel>();
             containerRegistry.RegisterForNavigation<ContralCardView,ContralCardViewModel>();
             containerRegistry.RegisterForNavigation<InspectView, InspectViewModel>();
+            containerRegistry.RegisterDialog<LoginView, LoginViewModel>("LoginView");
+        }
+
+
+        private static System.Threading.Mutex mutex;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            mutex = new System.Threading.Mutex(true, "OnlyRun_CRNS");
+            if (mutex.WaitOne(0, false))
+            {
+                base.OnStartup(e);
+            }
+            else
+            {
+                MessageBox.Show("程序已经在运行！", "提示");
+                this.Shutdown();
+            }
+
+        }
+
+
+        IDialogParameters parameters { get; set; }
+        IDialogService dialog;
+        protected override void OnInitialized()
+        {
+            dialog = Container.Resolve<IDialogService>();
+
+            dialog.ShowDialog("LoginView", parameters, Callback);
+        }
+
+
+        private void Callback(IDialogResult result)
+        {
+
+            if (result.Result == ButtonResult.OK)
+            {
+                //给主窗体传值
+                base.OnInitialized();
+                //return;
+            }
+            else
+            {
+
+                Environment.Exit(0);
+
+            }
+
         }
     }
 }
