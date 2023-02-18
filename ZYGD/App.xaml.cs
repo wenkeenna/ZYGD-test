@@ -31,6 +31,7 @@ namespace ZYGD
             containerRegistry.RegisterForNavigation<ContralCardView,ContralCardViewModel>();
             containerRegistry.RegisterForNavigation<InspectView, InspectViewModel>();
             containerRegistry.RegisterDialog<LoginView, LoginViewModel>("LoginView");
+            containerRegistry.RegisterDialog<DialogView, DialogViewModel>("DialogView");
         }
 
 

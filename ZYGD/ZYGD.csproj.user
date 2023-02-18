@@ -13,6 +13,9 @@
     <Compile Update="Views\ContralCardView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\InspectView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ContralCardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\InspectView.xaml">

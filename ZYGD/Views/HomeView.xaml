@@ -12,8 +12,19 @@
              d:DesignHeight="700" d:DesignWidth="1200" Background="White">
     <UserControl.Resources>
         <Style x:Key="btnStyle" TargetType="Button" BasedOn="{StaticResource  MaterialDesignFlatButton}">
-           
         </Style>
+
+        <Style x:Key="DGCHeaderStyle"
+          TargetType="{x:Type DataGridColumnHeader}"
+          BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin"  Value="5 0 0 0"/>
+
+        </Style>
+        
     </UserControl.Resources>
 
 
@@ -23,74 +34,114 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Bottom"  HorizontalAlignment="Right">
-            <md:Card   md:ShadowAssist.ShadowDepth="Depth2" Margin="10" Height="400" Width="200" Background="#EEEEF2">
-                <ItemsControl ItemsSource="{Binding PMatrix1}">
-                    <!--<i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding btnMatrixCommand}" 
-                                               CommandParameter="{Binding Content ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>-->
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Canvas x:Name="Canvas1" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
-                                <Button Style="{StaticResource btnStyle}"
+        <Grid Grid.Row="0">
+            <StackPanel>
+                <Button Command="{Binding btnTest}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0" ItemsSource="{Binding GridTests,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"  CanUserAddRows="False"
+                      CanUserSortColumns="False"  Margin="5" Background="#C2C3C9" ColumnHeaderHeight="30" >
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow }">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#DEDEDE"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns >
+                    <md:DataGridTextColumn  Binding="{Binding Code}"  Width="2*"  HeaderStyle="{StaticResource DGCHeaderStyle}" IsReadOnly="True"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                            Header="合并-分单号"   />
+
+                    <md:DataGridTextColumn  Binding="{Binding Name}"   Width="3*"     HeaderStyle="{StaticResource DGCHeaderStyle}"      IsReadOnly="True"                     
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"
+                                            ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                                            Header="抓取-分单号"/>
+
+                    <md:DataGridTextColumn  Binding="{Binding Description}"  Width="2*"  HeaderStyle="{StaticResource DGCHeaderStyle}" 
+                                           
+                                            Header="数量" />
+                    <!--EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"-->
+                    <!--<DataGridCheckBoxColumn Binding="{Binding IsChecked}"  Width="1*"    HeaderStyle="{StaticResource DGCHeaderStyle}"
+                                           
+                                             Header="选择"/>-->
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom"  HorizontalAlignment="Right">
+                <md:Card  x:Name="Card1" md:ShadowAssist.ShadowDepth="Depth2" Margin="10" Height="400" Width="200" Background="#EEEEF2">
+                    <ItemsControl ItemsSource="{Binding PMatrix1}">
+                    
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas x:Name="Canvas1" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
+                                    <Button Style="{StaticResource btnStyle}"
                                     Canvas.Left="{Binding XCorrdinate}" 
                                     Canvas.Top="{Binding YCorrdinate}" 
                                     Height="{Binding Radius}" 
                                     Width="{Binding Radius}" 
                                     Background="{Binding BackgroundColor,Mode=TwoWay}"
                                     Content="{Binding Number}" />
-                            </Canvas>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                </ItemsControl>
-            </md:Card>
-            <Label Width="100" VerticalAlignment="Center">
-                <md:PackIcon Kind="ArrowLeftThick" Width="85" Height="55"/>
-            </Label>
-            <md:Card md:ShadowAssist.ShadowDepth="Depth2" Margin="10"  Height="400" Width="200" Background="#EEEEF2">
-                <ItemsControl ItemsSource="{Binding PMatrix2}">
+                    </ItemsControl>
+                </md:Card>
+                <Label  VerticalAlignment="Center">
+                    <md:PackIcon Kind="ArrowLeftThick" MinWidth="40" MinHeight="40"/>
+                </Label>
+                <md:Card x:Name="Card2" md:ShadowAssist.ShadowDepth="Depth2" Margin="10"  Height="400" Width="200" Background="#EEEEF2">
+                    <ItemsControl ItemsSource="{Binding PMatrix2}">
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Canvas x:Name="Canvas2" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
-                                <Button Style="{StaticResource btnStyle}"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas x:Name="Canvas2" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
+                                    <Button Style="{StaticResource btnStyle}"
                                     Canvas.Left="{Binding XCorrdinate}" 
                                     Canvas.Top="{Binding YCorrdinate}" 
                                     Height="{Binding Radius}" 
                                     Width="{Binding Radius}" 
                                     Background="{Binding BackgroundColor,Mode=TwoWay}"
                                     Content="{Binding Number}" />
-                            </Canvas>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                </ItemsControl>
-            </md:Card>
-            <md:Card md:ShadowAssist.ShadowDepth="Depth2" Margin="10"  Height="400" Width="200" Background="#EEEEF2">
-                <ItemsControl ItemsSource="{Binding PMatrix3}">
+                    </ItemsControl>
+                </md:Card>
+                <md:Card x:Name="Card3" md:ShadowAssist.ShadowDepth="Depth2" Margin="10"  Height="400" Width="200" Background="#EEEEF2">
+                    <ItemsControl ItemsSource="{Binding PMatrix3}">
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Canvas x:Name="Canvas3" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
-                                <Button Style="{StaticResource btnStyle}"
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas x:Name="Canvas3" PreviewMouseLeftButtonDown="ItemsControl_MouseLeftButtonDown">
+                                    <Button Style="{StaticResource btnStyle}"
                                     Canvas.Left="{Binding XCorrdinate}" 
                                     Canvas.Top="{Binding YCorrdinate}" 
                                     Height="{Binding Radius}" 
                                     Width="{Binding Radius}" 
                                     Background="{Binding BackgroundColor,Mode=TwoWay}"
                                     Content="{Binding Number}" />
-                            </Canvas>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                </ItemsControl>
-            </md:Card>
-        </StackPanel>
-
+                    </ItemsControl>
+                </md:Card>
+            </StackPanel>
+        </Grid>
     </Grid>
 
 

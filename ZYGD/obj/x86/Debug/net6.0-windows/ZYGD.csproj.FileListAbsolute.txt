@@ -77,3 +77,5 @@ D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\refint\ZYGD.dll
 D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\ZYGD.pdb
 D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\ZYGD.genruntimeconfig.cache
 D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\ref\ZYGD.dll
+D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\Views\DialogView.g.cs
+D:\项目\ZYGD\ZYGD\obj\x86\Debug\net6.0-windows\Views\DialogView.baml

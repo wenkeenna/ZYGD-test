@@ -43,75 +43,55 @@
         </Style>
 
     </Window.Resources>
-    <Border x:Name="TitleBorder" Grid.Row="0" Background="#FFFFFF">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="9*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <!--<DockPanel  HorizontalAlignment="Left">
-                    <ListBox  ItemsSource="{Binding MenuBars}" >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding NavigateCommand}" 
-                                               CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button  Style="{StaticResource BtnStyle}" Content="{Binding Title}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-
-
-                    </ListBox>
-                </DockPanel>-->
-                <!--<Menu Grid.Row="0" Height="30" VerticalAlignment="Center" >
-                    --><!--<MenuItem x:Name="HomeView" Header="主页" VerticalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="HomeView"/>
-                    <MenuItem x:Name="ManualView" Header="手动" VerticalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="ManualView"/>
-                    <MenuItem x:Name="CameraView" Header="相机参数" VerticalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="CameraView" />
-                    <MenuItem x:Name="ContralCardView" Header="板卡参数" VerticalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="ContralCardView"/>
-                    <MenuItem x:Name="InspectView" Header="检测参数" VerticalAlignment="Center" Command="{Binding NavigateCommand}" CommandParameter="InspectView"/>--><!--
-                </Menu>-->
-                <DockPanel HorizontalAlignment="Left">
-                    <Button x:Name="HomeView" Style="{StaticResource BtnStyle}" Content="主   页" Command="{Binding NavigateCommand}" CommandParameter="HomeView"/>
-                    <Button x:Name="ManualView" Style="{StaticResource BtnStyle}" Content="手  动" Command="{Binding NavigateCommand}" CommandParameter="ManualView"/>
-                    <Button x:Name="CameraView" Style="{StaticResource BtnStyle}" Content="相机参数" Command="{Binding NavigateCommand}" CommandParameter="CameraView"/>
-                    <Button x:Name="ContralCardView" Style="{StaticResource BtnStyle}" Content="控制卡参数" Command="{Binding NavigateCommand}" CommandParameter="ContralCardView"/>
-                    <Button x:Name="InspectView" Style="{StaticResource BtnStyle}" Content="检测参数" Command="{Binding NavigateCommand}" CommandParameter="InspectView" Cursor="Hand"/>
-                </DockPanel>
-
-
-                <DockPanel  HorizontalAlignment="Right">
-                    <Button x:Name="BtnMin"  Style="{StaticResource BtnStyle}" Cursor="Hand">
-                        <DockPanel>
-                            <md:PackIcon Kind="Minimize" Margin="0" Padding="0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
-                        </DockPanel>
-                    </Button>
-                    <Button x:Name="BtnMax"  Style="{StaticResource BtnStyle}" Cursor="Hand">
-                        <DockPanel>
-                            <md:PackIcon Kind="Maximize" Margin="0" Padding="0" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
-                        </DockPanel>
-                    </Button>
-                    <Button x:Name="BtnClose"  Style="{StaticResource BtnStyle}">
-                        <DockPanel>
-                            <md:PackIcon Kind="Close" Margin="0" Padding="0" Width="25" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
-                        </DockPanel>
-                    </Button>
-                </DockPanel>
-            </Grid>
-            <Grid Grid.Row="1">
+    <Grid  Background="#FFFFFF">
+        <DockPanel>
+            <Grid DockPanel.Dock="Top"  x:Name="TitleBorder" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="235*"/>
-                    <ColumnDefinition Width="535*"/>
-                    <ColumnDefinition Width="68*"/>
-                    <ColumnDefinition Width="362*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <ContentControl  prism:RegionManager.RegionName="{x:Static ext:PrismManager.MainViewRegionName}" Grid.ColumnSpan="4"/>
+               
+                        <DockPanel Grid.Column="0" HorizontalAlignment="Left">
+                            <Button x:Name="HomeView" Style="{StaticResource BtnStyle}" Content="主   页" Command="{Binding NavigateCommand}" CommandParameter="HomeView"/>
+                            <Button x:Name="ManualView" Style="{StaticResource BtnStyle}" Content="手  动" Command="{Binding NavigateCommand}" CommandParameter="ManualView"/>
+                            <Button x:Name="CameraView" Style="{StaticResource BtnStyle}" Content="相机参数" Command="{Binding NavigateCommand}" CommandParameter="CameraView"/>
+                            <Button x:Name="ContralCardView" Style="{StaticResource BtnStyle}" Content="控制卡参数" Command="{Binding NavigateCommand}" CommandParameter="ContralCardView"/>
+                            <Button x:Name="InspectView" Style="{StaticResource BtnStyle}" Content="检测参数" Command="{Binding NavigateCommand}" CommandParameter="InspectView" Cursor="Hand"/>
+                            <Label Visibility="Hidden"/>
+                        </DockPanel>
+                <TextBlock Grid.Column="1"/>
+                <DockPanel Grid.Column="2" HorizontalAlignment="Right">
+                            <Button x:Name="BtnMin"  Style="{StaticResource BtnStyle}" Cursor="Hand">
+                                <DockPanel>
+                                    <md:PackIcon Kind="Minimize" Margin="0" Padding="0" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+                                </DockPanel>
+                            </Button>
+                            <Button x:Name="BtnMax"  Style="{StaticResource BtnStyle}" Cursor="Hand">
+                                <DockPanel>
+                                    <md:PackIcon Kind="Maximize" Margin="0" Padding="0" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+                                </DockPanel>
+                            </Button>
+                            <Button x:Name="BtnClose"  Style="{StaticResource BtnStyle}">
+                                <DockPanel>
+                                    <md:PackIcon Kind="Close" Margin="0" Padding="0" Width="25" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black"/>
+                                </DockPanel>
+                            </Button>
+                        </DockPanel>
+                   
+               
             </Grid>
-        </Grid>
-    </Border>
+
+            <Grid DockPanel.Dock="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="235*"/>
+                        <ColumnDefinition Width="535*"/>
+                        <ColumnDefinition Width="68*"/>
+                        <ColumnDefinition Width="362*"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl  prism:RegionManager.RegionName="{x:Static ext:PrismManager.MainViewRegionName}" Grid.ColumnSpan="4"/>
+                </Grid>
+           
+        </DockPanel>
+    </Grid>
 </Window>

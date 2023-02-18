@@ -53,6 +53,14 @@ namespace ZYGD.ViewModels
 
         private void LoginFun()
         {
+
+
+            bool temp1 = ParameterCheck.IsValidDecimal("124444443.4544444446");
+            bool temp2 = ParameterCheck.IsValidInteger("123.777");
+            bool temp3 = ParameterCheck.IsValidInteger("123");
+            bool temp4 = ParameterCheck.IsValidBoolean("True");
+            bool temp5 = ParameterCheck.IsValidBoolean("False");
+
             _logHelper.Info("登录系统");
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
             //if (UserManagement.CheckUser(Username, Password))

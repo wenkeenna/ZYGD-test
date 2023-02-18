@@ -1,4 +1,6 @@
-﻿using Prism.Events;
+﻿using ImTools;
+using MaterialDesignThemes.Wpf;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,5 +35,14 @@ namespace ZYGD.Views
         {
             _eventAggregator.GetEvent<Event_PMatrix1Click>().Publish(sender);
         }
+
+        private void StackPanel_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+          
+         
+           
+        }
+
+      
     }
 }

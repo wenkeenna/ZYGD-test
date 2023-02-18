@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="ZYGD.Views.DialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:ZYGD.ViewModels"
+             xmlns:local="clr-namespace:ZYGD.Views"
+             d:DataContext="{d:DesignInstance Type=vm:DialogViewModel}"
+             mc:Ignorable="d" Background="Transparent">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen"/>
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="1" ResizeBorderThickness="0" CornerRadius="5"  GlassFrameThickness="0" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ShowInTaskbar" Value="False"/>
+            <Setter Property="SizeToContent" Value="Manual"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Topmost" Value="True"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+        <Style x:Key="BtnStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="MinWidth" Value="30"/>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="Background" Value="#E6E6E6"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#969696"/>
+                    <Setter Property="BorderBrush" Value="#969696"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#707070"/>
+                    <Setter Property="BorderBrush" Value="#707070"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+
+    <md:Card   md:ShadowAssist.ShadowDepth="Depth4"  Background="#E6E6E6">
+            <Grid  Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Margin="5 0 0 0" Text="提示信息" VerticalAlignment="Top"  FontSize="20" />
+
+                <TextBox Grid.Row="1" TextWrapping="Wrap" Text="{Binding ShowMessage}" IsReadOnly="True"  Margin="20"
+                     Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Background="Transparent"/>
+                <DockPanel Grid.Row="2" LastChildFill="False" HorizontalAlignment="Center">
+                    <Button Style="{DynamicResource BtnStyle}" Width="100" Margin="0 0 40 0" Content="确认" FontSize="18" Command="{Binding ConfirmCommand}" Cursor="Hand"/>
+                    <Button Style="{DynamicResource BtnStyle}"  Width="100" Margin="40 0 0 0" Content="取消" FontSize="18"  Command="{Binding CancelCommand}" Cursor="Hand"/>
+                </DockPanel>
+            </Grid>
+        </md:Card>
+  
+  
+</UserControl>

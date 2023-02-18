@@ -1,9 +1,11 @@
 ﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +20,18 @@ namespace ZYGD.ViewModels
   public  class HomeViewModel: BindableBase
     {
 
-        #region 变量
+       
         public IEventAggregator _eventAggregator;
+        private IDialogService _dialogService;
         public DelegateCommand<string> btnMatrixCommand { get; private set; }
+        public DelegateCommand<string> btnTest { get; private set; }    
+        private ObservableCollection<DataGridTest> gridTests;
+        public ObservableCollection<DataGridTest> GridTests
+        {
+            get { return gridTests; }
+            set { gridTests = value; RaisePropertyChanged(); }
+        }   
+        #region 矩阵变量
         /// <summary>
         /// 产品矩阵1参数
         /// </summary>
@@ -65,15 +76,21 @@ namespace ZYGD.ViewModels
         }
         #endregion
 
-        public HomeViewModel(IEventAggregator ea)
+        public HomeViewModel(IEventAggregator ea, IDialogService dialogService)
         {
+
             _eventAggregator = ea;
+            _dialogService = dialogService; 
+
+
             _eventAggregator.GetEvent<Event_PMatrix1Click>().Subscribe(_Event_PMClickFun);
+
+            btnTest = new DelegateCommand<string>(btnTestFun);
 
             PMatrix1 = new ObservableCollection<ProductMatrix>();
             PMatrix2 = new ObservableCollection<ProductMatrix>();
             PMatrix3 = new ObservableCollection<ProductMatrix>();
-
+            GridTests = new ObservableCollection<DataGridTest>();
             _PM1.Radui = 10;
             _PM1.XSpacing = 19;
             _PM1.YSpacing = 19;
@@ -115,13 +132,31 @@ namespace ZYGD.ViewModels
                 PMatrix3 = LoadProductMatrix(_PM3.XStartPoint, _PM3.YStartPoint, _PM3.XPoingNumber,
                                               _PM3.YPoingNumber, _PM3.XSpacing, _PM3.YSpacing, _PM3.Radui, PMatrix3, _PM3);
             });
-
+            for(int ii = 0; ii < 20; ii++)
+            {
+                GridTests.Add(new DataGridTest() { Code = "testcode", Name = "testname", Description = "testdescr", Numeric = "0" });
+            }
+           
         }
 
+        private void btnTestFun(string str)
+        {
+            ShowDialog("弹窗测试");
+        }
+        private void ShowDialog(string str)
+        {
 
+            DialogParameters keyValues = new DialogParameters();
+            keyValues.Add("key", str);
+            _dialogService.ShowDialog("DialogView", keyValues, DialogCallBackFun);
+        }
 
+        private void DialogCallBackFun(IDialogResult result)
+        {
+
+        }
         #region 产品矩阵/加载/更新
-      
+
         /// <summary>
         /// 界面点击更新
         /// </summary>

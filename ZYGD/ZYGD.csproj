@@ -15,9 +15,4 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Camera\" />
-    <Folder Include="Motion\" />
-  </ItemGroup>
-
 </Project>
