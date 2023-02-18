@@ -3,10 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:ZYGD.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:ZYGD.Views"
+             d:DataContext="{d:DesignInstance Type=vm:ContralCardViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <Style x:Key="BtnStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="MinWidth" Value="30"/>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="Background" Value="#E6E6E6"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#969696"/>
+                    <Setter Property="BorderBrush" Value="#969696"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#707070"/>
+                    <Setter Property="BorderBrush" Value="#707070"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="卡" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"  Foreground="Black"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                <Button  Content="保存参数" Width="100" Style="{StaticResource BtnStyle}" Command="{Binding btnCommand }" Margin="10 0 0 0" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding AxisParas}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+
+                    <DataTemplate>
+                        <md:Card  md:ShadowAssist.ShadowDepth="Depth4" MinHeight="100" MinWidth="100" Margin="5">
+                            <StackPanel Margin="5">
+                                <DockPanel>
+                                    <TextBlock Text="轴名称："  Foreground="Black"/>
+                                    <TextBlock Text="{Binding Name,Mode=TwoWay}"  Foreground="Black"  />
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="轴ID："  Foreground="Black"/>
+                                    <TextBox Text="{Binding ID,Mode=TwoWay}"  Foreground="Black" Padding="0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="速度："  Foreground="Black"/>
+                                    <TextBox Text="{Binding Speed,Mode=TwoWay}"  Foreground="Black" Padding="0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="加速度："  Foreground="Black"/>
+                                    <TextBox Text="{Binding Acc,Mode=TwoWay}"  Foreground="Black" Padding="0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="减速度："  Foreground="Black"/>
+                                    <TextBox Text="{Binding Dec,Mode=TwoWay}"  Foreground="Black" Padding="0"/>
+                                </DockPanel>
+                            </StackPanel>
+                        </md:Card>
+                    </DataTemplate>
+
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </Grid>
 </UserControl>
